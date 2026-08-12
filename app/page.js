@@ -135,7 +135,6 @@ export default function Home() {
       </header>
 
       <main style={{ maxWidth: 420, margin: "0 auto", padding: "24px 20px" }}>
-        {/* Onglets */}
         <div style={{ display: "flex", background: C.card, border: `1px solid ${C.line}`, borderRadius: 12, padding: 4, marginBottom: 20 }}>
           <button
             onClick={() => setTab("gratuit")}
@@ -159,7 +158,6 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Bandeau abonnement */}
         {tab === "vip" && !subscribed && (
           <a
             href={TELEGRAM_CONTACT}
@@ -185,7 +183,6 @@ export default function Home() {
           </div>
         )}
 
-        {/* Feed */}
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {visiblePronos.length === 0 && (
             <p style={{ textAlign: "center", color: C.textDim, fontSize: 14, padding: "32px 0" }}>
@@ -208,4 +205,44 @@ export default function Home() {
                     <p style={{ fontSize: 11, textTransform: "uppercase", color: C.textDim, margin: 0 }}>
                       {p.competition || "—"}
                     </p>
-                    
+                    <h3 style={{ margin: "2px 0 0", fontWeight: 600 }}>{p.match}</h3>
+                  </div>
+                  <span style={{
+                    fontSize: 10, fontWeight: 600, textTransform: "uppercase",
+                    padding: "3px 8px", borderRadius: 999, color: s.color, background: `${s.color}22`,
+                  }}>
+                    {s.label}
+                  </span>
+                </div>
+
+                <div style={{ filter: locked ? "blur(4px)" : "none", userSelect: locked ? "none" : "auto", marginTop: 16 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", borderTop: `1px dashed ${C.line}`, paddingTop: 12 }}>
+                    <div>
+                      <p style={{ fontSize: 12, color: C.textDim, margin: 0 }}>Pronostic</p>
+                      <p style={{ margin: "2px 0 0", fontWeight: 500 }}>{p.pick}</p>
+                    </div>
+                    <div style={{ textAlign: "right" }}>
+                      <p style={{ fontSize: 12, color: C.textDim, margin: 0 }}>Cote</p>
+                      <p style={{ margin: "2px 0 0", fontWeight: 700, color: C.gold }}>{p.cote}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {locked && (
+                  <div style={{
+                    position: "absolute", inset: 0, display: "flex", flexDirection: "column",
+                    alignItems: "center", justifyContent: "center", gap: 6,
+                    background: "rgba(11,31,23,0.85)",
+                  }}>
+                    <span style={{ fontSize: 20 }}>🔒</span>
+                    <p style={{ fontSize: 12, color: "rgba(255,255,255,0.8)", margin: 0 }}>Réservé aux abonnés</p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </main>
+    </div>
+  );
+}
